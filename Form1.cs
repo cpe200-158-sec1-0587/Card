@@ -154,8 +154,8 @@ namespace Card
         }
         public string getAddress(int rank,int suit)
         {
-            string str = "";
-            switch (rank)
+            string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".png";
+            /*switch (rank)
             {
                 case 1: str = str + "1"; break;
                 case 2: str = str + "2"; break;
@@ -179,7 +179,7 @@ namespace Card
                 case 3: str = str + "-3.png"; break;
                 case 4: str = str + "-4.png"; break;
                 default : break;
-            }
+            }*/
             return str;
         }
         public Form1()
