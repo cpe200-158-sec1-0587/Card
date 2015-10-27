@@ -14,7 +14,7 @@ namespace Card
     {
         private List<ACard> all;
         private Player Player1;
-        private Player Player2;
+        private Player Player2; 
         private ACard a;
         private ACard b;
         private ACard pilea;
