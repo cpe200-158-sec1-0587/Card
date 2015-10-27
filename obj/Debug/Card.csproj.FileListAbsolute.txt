@@ -1,7 +1,6 @@
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\bin\Debug\Card.exe.config
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\obj\Debug\Card.csprojResolveAssemblyReference.cache
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\obj\Debug\Card.Form1.resources
-C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\obj\Debug\Card.Properties.Resources.resources
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\obj\Debug\Card.csproj.GenerateResource.Cache
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\bin\Debug\Card.exe
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\bin\Debug\Card.pdb
@@ -16,3 +15,4 @@ C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card - Copy\Card\obj\Debug\Card
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card - Copy\Card\obj\Debug\Card.csproj.GenerateResource.Cache
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card - Copy\Card\bin\Debug\Card.exe
 C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card - Copy\Card\bin\Debug\Card.pdb
+C:\Users\KYU.DESKTOP-5385ILF\OneDrive\CPE\261200\Card\Card\obj\Debug\Card.Properties.Resources.resources

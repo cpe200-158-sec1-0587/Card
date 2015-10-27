@@ -68,7 +68,7 @@ namespace Card
             if (!checkFirstPileA) pileA.Image = Image.FromFile(getAddress(pilea.getRank(), pilea.getSuit()));
             if (!checkFirstPileB) pileB.Image = Image.FromFile(getAddress(pileb.getRank(), pileb.getSuit()));
             showA.Image = Image.FromFile(getAddress(a.getRank(), a.getSuit()));
-            showB.Image = Image.FromFile("C:\\Users\\KYU.DESKTOP-5385ILF\\OneDrive\\CPE\\261200\\Card\\Card\\card\\back.jpg");
+            showB.Image = Image.FromFile("back.jpg");
         }
         public void Compare()
         {
@@ -154,7 +154,7 @@ namespace Card
         }
         public string getAddress(int rank,int suit)
         {
-            string str = "C:\\Users\\KYU.DESKTOP-5385ILF\\OneDrive\\CPE\\261200\\Card\\Card\\card\\";
+            string str = "";
             switch (rank)
             {
                 case 1: str = str + "1"; break;
@@ -188,6 +188,8 @@ namespace Card
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            deckA.Image = Image.FromFile("back.jpg");
+            deckB.Image = Image.FromFile("back.jpg");
             Prepare();
         }
 

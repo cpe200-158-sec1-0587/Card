@@ -54,7 +54,6 @@
             // 
             // deckA
             // 
-            this.deckA.Image = global::Card.Properties.Resources.back;
             this.deckA.Location = new System.Drawing.Point(789, 322);
             this.deckA.Name = "deckA";
             this.deckA.Size = new System.Drawing.Size(200, 250);
@@ -146,7 +145,6 @@
             // 
             // deckB
             // 
-            this.deckB.Image = global::Card.Properties.Resources.back;
             this.deckB.Location = new System.Drawing.Point(268, 57);
             this.deckB.Name = "deckB";
             this.deckB.Size = new System.Drawing.Size(200, 250);
