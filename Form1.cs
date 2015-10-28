@@ -20,6 +20,8 @@ namespace Card
         private ACard b;
         private ACard pilea;
         private ACard pileb;
+        private ACard tempa;
+        private ACard tempb;
 
         private Boolean checkFirstCompare;
         private Boolean checkManyHitCompare;
@@ -74,6 +76,24 @@ namespace Card
             return randomList;
         }
 
+        //Show Last Card in pile
+        private void showPileA(ACard incard)
+        {
+            lastA3.Image = lastA2.Image;
+            lastA2.Image = lastA1.Image;
+            lastA1.Image = pileA.Image;
+            pileA.Image = Image.FromFile(getAddress(incard.getRank(), incard.getSuit()));
+            tempa = incard;
+        }
+        private void showPileB(ACard incard)
+        {
+            lastB3.Image = lastB2.Image;
+            lastB2.Image = lastB1.Image;
+            lastB1.Image = pileB.Image;
+            pileB.Image = Image.FromFile(getAddress(incard.getRank(), incard.getSuit()));
+            tempb = incard;
+        }
+
         //Click to Draw card
         private void hit_Click(object sender, EventArgs e)
         {
@@ -100,11 +120,22 @@ namespace Card
             checkFirstCompare = false;
             checkManyHitCompare = false;
             checkManyHitDraw = true;
+
+            if (!checkFirstPileA && tempa != pilea)
+            {
+                showPileA(b);
+                showPileA(a);
+                numpileA.Text = (Player1.getNumpile() <= 4) ? "+0" : "+" + Convert.ToString(Player1.getNumpile() - 4);
+            }
+            if (!checkFirstPileB && tempb != pileb)
+            {
+                showPileB(a);
+                showPileB(b);
+                numpileB.Text = (Player2.getNumpile() <= 4) ? "+0" : "+" + Convert.ToString(Player2.getNumpile() - 4);
+            }
+
             a = Player1.getCard();
             b = Player2.getCard();
-
-            if (!checkFirstPileA) pileA.Image = Image.FromFile(getAddress(pilea.getRank(), pilea.getSuit()));
-            if (!checkFirstPileB) pileB.Image = Image.FromFile(getAddress(pileb.getRank(), pileb.getSuit()));
             showA.Image = Image.FromFile(getAddress(a.getRank(), a.getSuit()));
             showB.Image = Image.FromFile("back.jpg");
         }
@@ -129,16 +160,12 @@ namespace Card
                 Player2.addPile(a);
                 Player2.addPile(b);
                 pileb = b;
-                listB.Items.Add(Convert.ToString(a.getRank()) + " " + Convert.ToString(a.getSuit()));
-                listB.Items.Add(Convert.ToString(b.getRank()) + " " + Convert.ToString(b.getSuit()));
                 checkFirstPileB = false;
             }
             else if (rankB > rankA)
             {
                 Player1.addPile(b);
                 Player1.addPile(a);
-                listA.Items.Add(Convert.ToString(b.getRank()) + " " + Convert.ToString(b.getSuit()));
-                listA.Items.Add(Convert.ToString(a.getRank()) + " " + Convert.ToString(a.getSuit()));
                 pilea = a;
                 checkFirstPileA = false;
             }
@@ -164,29 +191,29 @@ namespace Card
                 showB.Image = Image.FromFile(getAddress(tmp2[i - 1].getRank(), tmp2[i - 1].getSuit()));
                 if (tmp1[i - 1].getRank() > tmp2[i - 1].getRank())
                 {
-                    MessageBox.Show("Player2 Win " + num * 2 + " Cards!!!");
+                    MessageBox.Show("Player2 Win " + (num * 2 + 2) + " Cards!!!");
                     for (i = 0; i < num; i++)
                     {
                         Player2.addPile(tmp1[i]);
                         Player2.addPile(tmp2[i]);
                         pileb = b;
-                        listB.Items.Add(Convert.ToString(tmp1[i].getRank()) + " " + Convert.ToString(tmp1[i].getSuit()));
-                        listB.Items.Add(Convert.ToString(tmp2[i].getRank()) + " " + Convert.ToString(tmp2[i].getSuit()));
                         checkFirstPileB = false;
                     }
+                    Player2.addPile(a);
+                    Player2.addPile(b);
                 }
                 else if (tmp1[i - 1].getRank() < tmp2[i - 1].getRank())
                 {
-                    MessageBox.Show("Player1 Win " + num * 2 + " Cards!!!");
+                    MessageBox.Show("Player1 Win " + (num * 2 + 2) + " Cards!!!");
                     for (i = 0; i < num; i++)
                     {
                         Player1.addPile(tmp2[i]);
                         Player1.addPile(tmp1[i]);
                         pilea = a;
-                        listA.Items.Add(Convert.ToString(tmp2[i].getRank()) + " " + Convert.ToString(tmp2[i].getSuit()));
-                        listA.Items.Add(Convert.ToString(tmp1[i].getRank()) + " " + Convert.ToString(tmp1[i].getSuit()));
                         checkFirstPileA = false;
                     }
+                    Player1.addPile(b);
+                    Player1.addPile(a);
                 }
                 else
                 {
@@ -200,8 +227,6 @@ namespace Card
                     Player2.inDeck(ShuffleList(Player2.getDeck()));
                 }
             }
-            numpileA.Text = Convert.ToString(Player1.getNumpile());
-            numpileB.Text = Convert.ToString(Player2.getNumpile());
         }
 
         //Generate name of card to use for call card's image
@@ -210,5 +235,6 @@ namespace Card
             string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".png";
             return str;
         }
+
     }
 }
