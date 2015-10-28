@@ -15,17 +15,31 @@ namespace Card
         private List<ACard> all;
         private Player Player1;
         private Player Player2; 
+
         private ACard a;
         private ACard b;
         private ACard pilea;
         private ACard pileb;
+
         private Boolean checkFirstCompare;
         private Boolean checkManyHitCompare;
         private Boolean checkManyHitDraw;
         private Boolean checkFirstPileA;
         private Boolean checkFirstPileB;
-        private static readonly Random rnd = new Random();
 
+        //Form function
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            deckA.Image = Image.FromFile("back.jpg");
+            deckB.Image = Image.FromFile("back.jpg");
+            Prepare();
+        }
+
+        //Prepare Function
         public void Prepare()
         {
             checkFirstCompare = true;
@@ -42,6 +56,8 @@ namespace Card
                 Player2.addDeck(all[i+1]);
             }
         }
+
+        //Shuffle Function
         private List<ACard> ShuffleList(List<ACard> inputList)
         {
             List<ACard> randomList = new List<ACard>();
@@ -57,6 +73,28 @@ namespace Card
 
             return randomList;
         }
+
+        //Click to Draw card
+        private void hit_Click(object sender, EventArgs e)
+        {
+            if (Player1.getNumdeck() == 1)
+            {
+                deckA.Hide();
+                deckB.Hide();
+            }
+            if (!checkManyHitDraw)
+            {
+                if (Player1.getNumdeck() > 0) Draw();
+                else
+                {
+                    if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
+                    else MessageBox.Show("All cards were drawed! Player B is !!!WINNER!!!");
+                    System.Threading.Thread.Sleep(2000);
+                }
+            }
+        }
+
+        //Draw Function
         public void Draw()
         {
             checkFirstCompare = false;
@@ -70,6 +108,14 @@ namespace Card
             showA.Image = Image.FromFile(getAddress(a.getRank(), a.getSuit()));
             showB.Image = Image.FromFile("back.jpg");
         }
+
+        //Click to compare Card
+        private void com_Click(object sender, EventArgs e)
+        {
+            if (!checkManyHitCompare && !checkFirstCompare) Compare();
+        }
+
+        //Compare Function
         public void Compare()
         {
             checkManyHitCompare = true;
@@ -118,6 +164,7 @@ namespace Card
                 showB.Image = Image.FromFile(getAddress(tmp2[i - 1].getRank(), tmp2[i - 1].getSuit()));
                 if (tmp1[i - 1].getRank() > tmp2[i - 1].getRank())
                 {
+                    MessageBox.Show("Player2 Win " + num * 2 + " Cards!!!");
                     for (i = 0; i < num; i++)
                     {
                         Player2.addPile(tmp1[i]);
@@ -130,6 +177,7 @@ namespace Card
                 }
                 else if (tmp1[i - 1].getRank() < tmp2[i - 1].getRank())
                 {
+                    MessageBox.Show("Player1 Win " + num * 2 + " Cards!!!");
                     for (i = 0; i < num; i++)
                     {
                         Player1.addPile(tmp2[i]);
@@ -142,80 +190,25 @@ namespace Card
                 }
                 else
                 {
+                    MessageBox.Show("Equal again!!! Return card to your deck and shuffle");
                     for (i = 0; i < num; i++)
                     {
                         Player1.addDeck(tmp1[i]);
                         Player2.addDeck(tmp2[i]);
                     }
+                    Player1.inDeck(ShuffleList(Player1.getDeck()));
+                    Player2.inDeck(ShuffleList(Player2.getDeck()));
                 }
             }
             numpileA.Text = Convert.ToString(Player1.getNumpile());
             numpileB.Text = Convert.ToString(Player2.getNumpile());
         }
+
+        //Generate name of card to use for call card's image
         public string getAddress(int rank,int suit)
         {
             string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".png";
-            /*switch (rank)
-            {
-                case 1: str = str + "1"; break;
-                case 2: str = str + "2"; break;
-                case 3: str = str + "3"; break;
-                case 4: str = str + "4"; break;
-                case 5: str = str + "5"; break;
-                case 6: str = str + "6"; break;
-                case 7: str = str + "7"; break;
-                case 8: str = str + "8"; break;
-                case 9: str = str + "9"; break;
-                case 10: str = str + "10"; break;
-                case 11: str = str + "11"; break;
-                case 12: str = str + "12"; break;
-                case 13: str = str + "13"; break;
-                default: break;
-            }
-            switch (suit)
-            {
-                case 1: str = str + "-1.png";  break;
-                case 2: str = str + "-2.png"; break;
-                case 3: str = str + "-3.png"; break;
-                case 4: str = str + "-4.png"; break;
-                default : break;
-            }*/
             return str;
         }
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            deckA.Image = Image.FromFile("back.jpg");
-            deckB.Image = Image.FromFile("back.jpg");
-            Prepare();
-        }
-
-        private void hit_Click(object sender, EventArgs e)
-        {
-            if (Player1.getNumdeck() == 1) 
-            {
-                deckA.Hide();
-                deckB.Hide();
-            }
-            if (!checkManyHitDraw)
-            {
-                if (Player1.getNumdeck() > 0) Draw();
-                else
-                {
-                    if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
-                    else MessageBox.Show("All cards were drawed! Player B is !!!WINNER!!!");
-                    System.Threading.Thread.Sleep(2000);
-                }
-            }
-        }
-
-        private void com_Click(object sender, EventArgs e)
-        {
-            if(!checkManyHitCompare&&!checkFirstCompare) Compare();
-        }
-        
     }
 }

@@ -11,14 +11,19 @@ namespace Card
         private int rank;
         private int suit;
 
+        //Return current card's rank
         public int getRank()
         {
             return rank;
         }
+
+        //Return current card's suit
         public int getSuit()
         {
             return suit;
         }
+
+        //New Card
         public ACard(int rankin,int suitin)
         {
             rank = rankin;
