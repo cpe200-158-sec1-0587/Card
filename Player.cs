@@ -45,8 +45,8 @@ namespace Card
         //Draw Top card from deck
         public ACard getCard()
         {
-            ACard tmp = deck[0];
-            deck.RemoveAt(0);
+            ACard tmp = deck[getNumdeck()-1];
+            if (deck != null) deck.RemoveAt(getNumdeck()-1);
             return tmp;
         }
 

@@ -227,7 +227,7 @@
             // 
             // lastA1
             // 
-            this.lastA1.Location = new System.Drawing.Point(156, 286);
+            this.lastA1.Location = new System.Drawing.Point(161, 286);
             this.lastA1.Name = "lastA1";
             this.lastA1.Size = new System.Drawing.Size(100, 125);
             this.lastA1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -236,7 +236,7 @@
             // 
             // lastA2
             // 
-            this.lastA2.Location = new System.Drawing.Point(136, 286);
+            this.lastA2.Location = new System.Drawing.Point(146, 286);
             this.lastA2.Name = "lastA2";
             this.lastA2.Size = new System.Drawing.Size(100, 125);
             this.lastA2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -245,7 +245,7 @@
             // 
             // lastA3
             // 
-            this.lastA3.Location = new System.Drawing.Point(116, 286);
+            this.lastA3.Location = new System.Drawing.Point(131, 286);
             this.lastA3.Name = "lastA3";
             this.lastA3.Size = new System.Drawing.Size(100, 125);
             this.lastA3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -254,7 +254,7 @@
             // 
             // lastB1
             // 
-            this.lastB1.Location = new System.Drawing.Point(476, 141);
+            this.lastB1.Location = new System.Drawing.Point(471, 141);
             this.lastB1.Name = "lastB1";
             this.lastB1.Size = new System.Drawing.Size(100, 125);
             this.lastB1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -263,7 +263,7 @@
             // 
             // lastB2
             // 
-            this.lastB2.Location = new System.Drawing.Point(496, 141);
+            this.lastB2.Location = new System.Drawing.Point(485, 141);
             this.lastB2.Name = "lastB2";
             this.lastB2.Size = new System.Drawing.Size(100, 125);
             this.lastB2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -272,7 +272,7 @@
             // 
             // lastB3
             // 
-            this.lastB3.Location = new System.Drawing.Point(516, 141);
+            this.lastB3.Location = new System.Drawing.Point(500, 141);
             this.lastB3.Name = "lastB3";
             this.lastB3.Size = new System.Drawing.Size(100, 125);
             this.lastB3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

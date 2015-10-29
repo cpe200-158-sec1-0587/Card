@@ -109,7 +109,8 @@ namespace Card
                 {
                     if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
                     else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(3000);
+                    Application.Exit();
                 }
             }
         }
@@ -126,13 +127,13 @@ namespace Card
             {
                 showPileA(b);
                 showPileA(a);
-                numpileA.Text = (Player1.getNumpile() <= 4) ? "+0" : "+" + Convert.ToString(Player1.getNumpile() - 4);
+                if (Player1.getNumpile() > 4) numpileA.Text = "+" + Convert.ToString(Player1.getNumpile() - 4);
             }
             if (!checkFirstPileB && tempb != pileb)
             {
                 showPileB(a);
                 showPileB(b);
-                numpileB.Text = (Player2.getNumpile() <= 4) ? "+0" : "+" + Convert.ToString(Player2.getNumpile() - 4);
+                if (Player2.getNumpile() > 4) numpileB.Text = "+" + Convert.ToString(Player2.getNumpile() - 4);
             }
 
             a = Player1.getCard();
@@ -179,7 +180,8 @@ namespace Card
                 {
                     if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
                     else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(3000);
+                    Application.Exit();
                 }
                 List<ACard> tmp1 = new List<ACard>();
                 List<ACard> tmp2 = new List<ACard>();
