@@ -46,7 +46,7 @@ namespace Card
         public ACard getCard()
         {
             ACard tmp = deck[getNumdeck()-1];
-            if (deck != null) deck.RemoveAt(getNumdeck()-1);
+            deck.RemoveAt(getNumdeck()-1);
             return tmp;
         }
 

@@ -16,18 +16,20 @@ namespace Card
         private Player Player1;
         private Player Player2; 
 
-        private ACard a;
-        private ACard b;
-        private ACard pilea;
-        private ACard pileb;
-        private ACard tempa;
-        private ACard tempb;
+        private ACard a; //Drawed card from deckA.
+        private ACard b; //Drawed card from deckB.
+        private ACard pilea; //Current card in pileA.
+        private ACard pileb; //Current card in pileB.
+        private ACard tempa; //Current card that show in pileA.
+        private ACard tempb; //Current card that show in pileB.
+        private ACard currA;
+        private ACard currB;
 
-        private Boolean checkFirstCompare;
-        private Boolean checkManyHitCompare;
-        private Boolean checkManyHitDraw;
-        private Boolean checkFirstPileA;
-        private Boolean checkFirstPileB;
+        private Boolean checkFirstCompare; //Avoid some error when user use COMPARE before DRAW their card.
+        private Boolean checkManyHitCompare; //Avoid some error when user rapidly click COMPARE button many times.
+        private Boolean checkManyHitDraw; //Avoid some error when user rapidly click DRAW button many times.
+        private Boolean checkFirstPileA; //Decide when to show card on pileA.
+        private Boolean checkFirstPileB; //Decide when to show card on pileB.
 
         //Form function
         public Form1()
@@ -105,13 +107,7 @@ namespace Card
             if (!checkManyHitDraw)
             {
                 if (Player1.getNumdeck() > 0) Draw();
-                else
-                {
-                    if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
-                    else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
-                    System.Threading.Thread.Sleep(3000);
-                    Application.Exit();
-                }
+                else endprog();
             }
         }
 
@@ -123,14 +119,24 @@ namespace Card
             checkManyHitCompare = false;
             checkManyHitDraw = true;
 
-            if (!checkFirstPileA && tempa != pilea)
+            if (!checkFirstPileA && tempa != pilea) //If last card in pileA called 'pilea' not show as 'tempa', update it.
             {
+                if (a.getRank() == b.getRank())
+                {
+                    showPileA(currB);
+                    showPileA(currA);
+                }
                 showPileA(b);
                 showPileA(a);
                 if (Player1.getNumpile() > 4) numpileA.Text = "+" + Convert.ToString(Player1.getNumpile() - 4);
             }
             if (!checkFirstPileB && tempb != pileb)
             {
+                if (a.getRank() == b.getRank())
+                {
+                    showPileB(currA);
+                    showPileB(currB);
+                }
                 showPileB(a);
                 showPileB(b);
                 if (Player2.getNumpile() > 4) numpileB.Text = "+" + Convert.ToString(Player2.getNumpile() - 4);
@@ -171,20 +177,16 @@ namespace Card
                 pilea = a;
                 checkFirstPileA = false;
             }
-            else
+            else if (!(Player1.getNumdeck() - a.getRank() <= 0))
             {
                 MessageBox.Show("Rank is Equal at Rank " + Convert.ToString(a.getRank()));
+
                 holda.Image = Image.FromFile(getAddress(a.getRank(), a.getSuit()));
                 holdb.Image = Image.FromFile(getAddress(b.getRank(), b.getSuit()));
-                if (Player1.getNumdeck() - a.getRank() <= 0)
-                {
-                    if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
-                    else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
-                    System.Threading.Thread.Sleep(3000);
-                    Application.Exit();
-                }
+
                 List<ACard> tmp1 = new List<ACard>();
                 List<ACard> tmp2 = new List<ACard>();
+
                 int num = a.getRank(), i;
 
                 for (i = 0; i < num; i++)
@@ -206,6 +208,8 @@ namespace Card
                         pileb = b;
                         checkFirstPileB = false;
                     }
+                    currA = tmp1[i - 1];
+                    currB = tmp2[i - 1];
                     Player2.addPile(a);
                     Player2.addPile(b);
                 }
@@ -219,6 +223,8 @@ namespace Card
                         pilea = a;
                         checkFirstPileA = false;
                     }
+                    currA = tmp1[i - 1];
+                    currB = tmp2[i - 1];
                     Player1.addPile(b);
                     Player1.addPile(a);
                 }
@@ -229,18 +235,33 @@ namespace Card
                     {
                         Player1.addDeck(tmp1[i]);
                         Player2.addDeck(tmp2[i]);
+                        showA.Image = null;
+                        showB.Image = null;
                     }
                     Player1.inDeck(ShuffleList(Player1.getDeck()));
                     Player2.inDeck(ShuffleList(Player2.getDeck()));
                 }
+            }
+            else
+            {
+                MessageBox.Show("Rank is Equal at Rank " + Convert.ToString(a.getRank()) + "you nust to draw" + Convert.ToString(a.getRank()) + "cards from your deck but we know that it will not enough, So...");
+                endprog();
             }
         }
 
         //Generate name of card to use for call card's image
         public string getAddress(int rank,int suit)
         {
-            string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".jpg";
-            return str;
+            return Convert.ToString(rank)+"-"+Convert.ToString(suit)+".jpg";
+        }
+
+        //End Condition
+        private void endprog()
+        {
+            if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
+            else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
+            System.Threading.Thread.Sleep(3000);
+            Application.Exit();
         }
 
         //Click Restart
