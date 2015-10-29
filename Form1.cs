@@ -108,7 +108,7 @@ namespace Card
                 else
                 {
                     if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
-                    else MessageBox.Show("All cards were drawed! Player B is !!!WINNER!!!");
+                    else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
                     System.Threading.Thread.Sleep(2000);
                 }
             }
@@ -117,6 +117,7 @@ namespace Card
         //Draw Function
         public void Draw()
         {
+            clearcard();
             checkFirstCompare = false;
             checkManyHitCompare = false;
             checkManyHitDraw = true;
@@ -172,10 +173,12 @@ namespace Card
             else
             {
                 MessageBox.Show("Rank is Equal at Rank " + Convert.ToString(a.getRank()));
+                holda.Image = Image.FromFile(getAddress(a.getRank(), a.getSuit()));
+                holdb.Image = Image.FromFile(getAddress(b.getRank(), b.getSuit()));
                 if (Player1.getNumdeck() - a.getRank() <= 0)
                 {
                     if (Player1.getNumpile() > Player2.getNumpile()) MessageBox.Show("All cards were drawed! Player A is !!!WINNER!!!");
-                    else MessageBox.Show("All cards were drawed! Player B is !!!WINNER!!!");
+                    else MessageBox.Show("All cards were drawed! COMPUTER is !!!WINNER!!!");
                     System.Threading.Thread.Sleep(2000);
                 }
                 List<ACard> tmp1 = new List<ACard>();
@@ -184,7 +187,9 @@ namespace Card
 
                 for (i = 0; i < num; i++)
                 {
-                    tmp1.Add(Player1.getCard());
+                    ACard tempcard = Player1.getCard();
+                    if (i < num - 1) holdcard(tempcard);
+                    tmp1.Add(tempcard);
                     tmp2.Add(Player2.getCard());
                 }
                 showA.Image = Image.FromFile(getAddress(tmp1[i - 1].getRank(), tmp1[i - 1].getSuit()));
@@ -232,9 +237,75 @@ namespace Card
         //Generate name of card to use for call card's image
         public string getAddress(int rank,int suit)
         {
-            string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".png";
+            string str = Convert.ToString(rank)+"-"+Convert.ToString(suit)+".jpg";
             return str;
         }
 
+        //Click Restart
+        private void newgame_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        //Update holded Card
+        private void holdcard(ACard cardin)
+        {
+            hold12.Image = hold11.Image;
+            hold11.Image = hold10.Image;
+            hold10.Image = hold9.Image;
+            hold9.Image = hold8.Image;
+            hold8.Image = hold7.Image;
+            hold7.Image = hold6.Image;
+            hold6.Image = hold5.Image;
+            hold5.Image = hold4.Image;
+            hold4.Image = hold3.Image;
+            hold3.Image = hold2.Image;
+            hold2.Image = hold1.Image;
+            hold1.Image = Image.FromFile(getAddress(cardin.getRank(), cardin.getSuit()));
+
+            chold12.Image = chold11.Image;
+            chold11.Image = chold10.Image;
+            chold10.Image = chold9.Image;
+            chold9.Image = chold8.Image;
+            chold8.Image = chold7.Image;
+            chold7.Image = chold6.Image;
+            chold6.Image = chold5.Image;
+            chold5.Image = chold4.Image;
+            chold4.Image = chold3.Image;
+            chold3.Image = chold2.Image;
+            chold2.Image = chold1.Image;
+            chold1.Image = Image.FromFile("back.jpg");
+        }
+        //Clear holded Card
+        private void clearcard()
+        {
+            hold12.Image = null;
+            hold11.Image = null;
+            hold10.Image = null;
+            hold9.Image = null;
+            hold8.Image = null;
+            hold7.Image = null;
+            hold6.Image = null;
+            hold5.Image = null;
+            hold4.Image = null;
+            hold3.Image = null;
+            hold2.Image = null;
+            hold1.Image = null;
+            holda.Image = null;
+
+            chold12.Image = null;
+            chold11.Image = null;
+            chold10.Image = null;
+            chold9.Image = null;
+            chold8.Image = null;
+            chold7.Image = null;
+            chold6.Image = null;
+            chold5.Image = null;
+            chold4.Image = null;
+            chold3.Image = null;
+            chold2.Image = null;
+            chold1.Image = null;
+            holdb.Image = null;
+        }
     }
 }
